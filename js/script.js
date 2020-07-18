@@ -1,3 +1,6 @@
+// var loop = new Audio('sound/solfegioLoop.mp3');
+// loop.loop=true;
+// loop.play();
 
 
 	var viewWidth = window.innerWidth;
@@ -36,6 +39,8 @@ containerSprite.alpha=.89;
 containerSprite.blendMode = PIXI.BLEND_MODES.OVERLAY;
 containerSprite.cursor = "url('images/dot.png'),auto";
 
+
+
 stage.addChild(containerSprite);
 
 
@@ -47,15 +52,27 @@ stage.addChild(containerSprite);
 			`sound/splash1.mp3`,
 			`sound/splash2.mp3`,
 			`sound/splash3.mp3`,
-			`sound/splash4.mp3`
+			`sound/splash4.mp3`,
+			`sound/solfegioLoop.mp3`
 		])
 		sounds.whenLoaded = setup;
-		function setup() {
+		var county=0;
+		function setup(input) {
 			var random = Math.floor(Math.random() * Math.floor(4)) + 1;
 			const 	splash = sounds[`sound/splash${random}.mp3`]
+
+			county++;
 		  //Initialize sounds here
 		  splash.volume = Math.random() / 2 - .3;
 		  var play = splash.play();
+
+		  if (county===1){
+		  	var loop = sounds['sound/solfegioLoop.mp3'];
+		  	loop.loop=true;
+		  	loop.volume=0.5
+		  	loop.play();
+		  	
+		  }
 
 		  return play
 		}
